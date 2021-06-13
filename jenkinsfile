@@ -12,7 +12,7 @@ pipeline {
         stage('KILL PROCESS') {
             steps {
                echo "KILL PROCESS"
-               sh 'cd /www/wwwroot/src/'
+               sh 'cd /www/wwwroot/src'
                sh './app.sh stop'
             }
         }
@@ -24,7 +24,7 @@ pipeline {
          }
          stage('RUN PROJECT') {
              steps {
-               sh 'cd /www/wwwroot/src/'
+               sh 'cd /www/wwwroot/src'
                sh './app.sh start'
                sh './app.sh status'
              }
