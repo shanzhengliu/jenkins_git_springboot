@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    environment {
+        BUILD_ID='dontKillMe'
+        MAVEN_HOME='/www/maven-3.3'
+        MAVEN_BIN = '/www/maven-3.3/bin'
+    }
     stages {
         stage('KILL PROCESS') {
             steps {
@@ -9,9 +14,7 @@ pipeline {
         }
          stage('BUILD PROJECT') {
             steps {
-              sh 'export BUILD_ID=dontKillMe'
-              sh 'export MAVEN_HOME=/www/maven-3.3'
-              sh 'export PATH=$MAVEN_HOME/bin:$PATH'
+              echo "BUILD PROJECT"
               sh 'mvn install'
             }
          }
