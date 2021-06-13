@@ -17,18 +17,17 @@ pipeline {
             }
         }
          stage('BUILD PROJECT') {
-                    steps {
-                      cd /www/wwwroot/src/spring_pineline
-                      mvn install
-                    }
-                }
+            steps {
+              cd /www/wwwroot/src/spring_pineline
+              mvn install
+            }
+         }
          stage('RUN PROJECT') {
-                     steps {
-                       cd /www/wwwroot/src/
-                       ./app.sh start
-                       ./app.sh status
-                     }
-                 }
-
+             steps {
+               cd /www/wwwroot/src/
+               ./app.sh start
+               ./app.sh status
+             }
+         }
     }
 }
