@@ -4,9 +4,9 @@ pipeline {
         stage('VAR SETTING') {
             steps {
                echo "VAR SETTING"
-               export BUILD_ID=dontKillMe
-               export MAVEN_HOME=/www/maven-3.3
-               export PATH=$MAVEN_HOME/bin:$PATH
+               export `BUILD_ID=dontKillMe`
+               export `MAVEN_HOME=/www/maven-3.3`
+               export `PATH=$MAVEN_HOME/bin:$PATH`
             }
         }
         stage('KILL PROCESS') {
