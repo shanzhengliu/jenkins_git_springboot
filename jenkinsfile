@@ -13,6 +13,7 @@ pipeline {
             steps {
                echo "KILL PROCESS"
                sh 'cd /www/wwwroot/src'
+               sh 'ls'
                sh './app.sh stop'
             }
         }
