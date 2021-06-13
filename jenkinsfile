@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    tools {
-        new-maven 'apache-maven-3.6.0'
-        jdk 'java-1.8-openjdk'
+    environment {
+        BUILD_ID='dontKillMe'
+        MAVEN_BIN = '/www/maven-3.3/bin'
     }
     stages {
         stage('KILL PROCESS') {
@@ -14,18 +14,18 @@ pipeline {
          stage('BUILD PROJECT') {
             steps {
               echo "BUILD PROJECT"
-              sh "cd /www/wwwroot/src/spring_pineline;mvn install"
+              sh "cd /www/wwwroot/src/spring_pineline;${MAVEN_BIN}/mvn install"
             }
          }
         stage('PACKAGE PROJECT') {
                  steps {
                    echo "PACKAGE PROJECT"
-                   sh 'cd /www/wwwroot/src/spring_pineline;mvn package'
+                   sh 'cd /www/wwwroot/src/spring_pineline;${MAVEN_BIN}/mvn package'
                  }
               }
          stage('RUN PROJECT') {
              steps {
-               withEnv(['JENKINS_NODE_COOKIE=dontkillme']) {
+               withEnv(['JENKINS_NODE_COOKIE=${BUILD_ID}']) {
                sh '/www/wwwroot/src/app.sh start'
                }
              }
