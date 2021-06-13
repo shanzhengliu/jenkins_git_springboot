@@ -15,9 +15,15 @@ pipeline {
          stage('BUILD PROJECT') {
             steps {
               echo "BUILD PROJECT"
-              sh 'mvn install'
+              sh '/www/maven-3.3/bin/mvn install'
             }
          }
+        stage('PACKAGE PROJECT') {
+                 steps {
+                   echo "PACKAGE PROJECT"
+                   sh '/www/maven-3.3/bin/mvn package'
+                 }
+              }
          stage('RUN PROJECT') {
              steps {
                sh '/www/wwwroot/src/app.sh start'
