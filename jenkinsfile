@@ -26,7 +26,9 @@ pipeline {
               }
          stage('RUN PROJECT') {
              steps {
-               sh 'export BUILD_ID=dontKillMe;/www/wwwroot/src/app.sh start'
+               withEnv(['JENKINS_NODE_COOKIE=dontkillme']) {
+               sh '/www/wwwroot/src/app.sh start'
+               }
              }
          }
     }
