@@ -1,15 +1,34 @@
 pipeline {
     agent any
     stages {
-        stage('Test') {
+        stage('VAR SETTING') {
             steps {
-               echo "HELLO"
+               echo "VAR SETTING"
+               export BUILD_ID=dontKillMe
+               export MAVEN_HOME=/www/maven-3.3
+               export PATH=$MAVEN_HOME/bin:$PATH
             }
         }
-        stage('Build') {
+        stage('KILL PROCESS') {
             steps {
-               echo "TEST"
+               echo "KILL PROCESS"
+               cd /www/wwwroot/src/
+               ./app.sh stop
             }
         }
+         stage('BUILD PROJECT') {
+                    steps {
+                      cd /www/wwwroot/src/spring_pineline
+                      mvn install
+                    }
+                }
+         stage('RUN PROJECT') {
+                     steps {
+                       cd /www/wwwroot/src/
+                       ./app.sh start
+                       ./app.sh status
+                     }
+                 }
+
     }
 }
