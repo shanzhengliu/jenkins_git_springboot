@@ -1,14 +1,6 @@
 pipeline {
     agent any
     stages {
-        stage('VAR SETTING') {
-            steps {
-               echo "VAR SETTING"
-               sh 'export BUILD_ID=dontKillMe'
-               sh 'export MAVEN_HOME=/www/maven-3.3'
-               sh 'export PATH=$MAVEN_HOME/bin:$PATH'
-            }
-        }
         stage('KILL PROCESS') {
             steps {
                echo "KILL PROCESS"
@@ -17,7 +9,9 @@ pipeline {
         }
          stage('BUILD PROJECT') {
             steps {
-              sh 'cd /www/wwwroot/src/spring_pineline'
+              sh 'export BUILD_ID=dontKillMe'
+              sh 'export MAVEN_HOME=/www/maven-3.3'
+              sh 'export PATH=$MAVEN_HOME/bin:$PATH'
               sh 'mvn install'
             }
          }
