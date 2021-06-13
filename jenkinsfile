@@ -14,13 +14,13 @@ pipeline {
          stage('BUILD PROJECT') {
             steps {
               echo "BUILD PROJECT"
-              sh "cd /www/wwwroot/src/spring_pineline;${MAVEN_BIN}/mvn install"
+              sh "cd /www/wwwroot/src/spring_pineline;mvn install"
             }
          }
         stage('PACKAGE PROJECT') {
                  steps {
                    echo "PACKAGE PROJECT"
-                   sh 'cd /www/wwwroot/src/spring_pineline;${MAVEN_BIN}/mvn package'
+                   sh 'cd /www/wwwroot/src/spring_pineline;mvn package'
                  }
               }
          stage('RUN PROJECT') {
