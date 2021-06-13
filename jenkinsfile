@@ -4,29 +4,29 @@ pipeline {
         stage('VAR SETTING') {
             steps {
                echo "VAR SETTING"
-               export 'BUILD_ID=dontKillMe'
-               export 'MAVEN_HOME=/www/maven-3.3'
-               export 'PATH=$MAVEN_HOME/bin:$PATH'
+               sh 'export BUILD_ID=dontKillMe'
+               sh 'export MAVEN_HOME=/www/maven-3.3'
+               sh 'export PATH=$MAVEN_HOME/bin:$PATH'
             }
         }
         stage('KILL PROCESS') {
             steps {
                echo "KILL PROCESS"
-               cd /www/wwwroot/src/
-               app.sh stop
+               sh 'cd /www/wwwroot/src/'
+               sh './app.sh stop'
             }
         }
          stage('BUILD PROJECT') {
             steps {
-              cd /www/wwwroot/src/spring_pineline
-              mvn install
+              sh 'cd /www/wwwroot/src/spring_pineline'
+              sh 'mvn install'
             }
          }
          stage('RUN PROJECT') {
              steps {
-               cd /www/wwwroot/src/
-               app.sh start
-               app.sh status
+               sh 'cd /www/wwwroot/src/'
+               sh './app.sh start'
+               sh './app.sh status'
              }
          }
     }
